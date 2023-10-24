@@ -80,8 +80,8 @@ public:
 class Gibrid_car : public DvS, public El_engine  {
 public:
     Gibrid_car() = default;
-    Gibrid_car(int new_power, int new_el_h_power, std::string NewName, int NewCounter,int cilinders_count) :
-        Transport(NewName, NewCounter), DvS(), El_engine(){
+    Gibrid_car(int new_power, int new_el_h_power, std::string NewName, int pasCounter,int cilinders_count) :
+        Transport(NewName, pasCounter), DvS(), El_engine(){
         el_h_Power = new_el_h_power;
         Power = new_power;
         cylinders = cilinders_count;
@@ -101,8 +101,9 @@ public:
 
 
 class Car : virtual public DvS {
+public:
     Car() = default;
-    Car(int new_power,std::string NewName, int NewCounter, int cylinders_count) :Transport(NewName, NewCounter), DvS(){
+    Car(int new_power,std::string NewName, int pasCounter, int cylinders_count) :Transport(NewName, pasCounter), DvS(){
         Power = new_power;
         cylinders = cylinders_count;
     }
@@ -118,6 +119,7 @@ class Car : virtual public DvS {
 
 
 class Riksha : virtual public Human_power { //повозка из Индии
+public:
     Riksha() = default;
     Riksha(std::string newName, int new_power, int pas_count) :Transport(newName, pas_count), Human_power() {
         hum_power = new_power;
@@ -208,11 +210,11 @@ int main() {
 
     //objE.id = 9;
     std::vector<Transport*> auto_park;
-    auto_park.push_back(new Car{});
-    auto_park.push_back(new Riksha{});
-    auto_park.push_back(new Gibrid_car);
+    auto_park.push_back(new Car{500, "bmw 5", 3, 8});
+    auto_park.push_back(new Riksha{ "Рикша", 50, 2 });
+    auto_park.push_back(new Gibrid_car{400, 150, "Mercedes EQS", 3, 6 });
     for (auto& el : auto_park) {
-                //std::cout << el->Name << "\n";
+                std::cout << el->Name << "\n";
                 el->MakeSound();
                 el->Move();
                 
